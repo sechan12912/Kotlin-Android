@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "BookMarket"
 include(":app")
- 
+include(":TableLayoutProject")
+project(":TableLayoutProject").projectDir = file("Chap04/TableLayoutProject/app")
