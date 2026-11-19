@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Chap04/TableLayoutProject/app" />
+            <option value="$PROJECT_DIR$/Chap06/IntentFilterProject/app" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

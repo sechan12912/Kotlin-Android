@@ -26,3 +26,5 @@ rootProject.name = "BookMarket"
 include(":app")
 include(":TableLayoutProject")
 project(":TableLayoutProject").projectDir = file("Chap04/TableLayoutProject/app")
+include(":IntentFilterProject")
+project(":IntentFilterProject").projectDir = file("Chap06/IntentFilterProject/app")
