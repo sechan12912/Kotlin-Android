@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookMarket">
         <activity
-            android:name=".MenuActivity"
+            android:name=".BooksActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
