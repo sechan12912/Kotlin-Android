@@ -2,8 +2,12 @@ package com.androidbook.bookmarket
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,7 +26,6 @@ class BookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_book)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.book)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -67,6 +70,45 @@ class BookActivity : AppCompatActivity() {
             }
 
         }
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_book, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId) {
+            android.R.id.home->{
+                onBackPressed()
+
+            }
+            R.id.menu_home -> {
+                Toast.makeText(applicationContext,"홈으로 메뉴를 클릭하였습니다", Toast.LENGTH_LONG).show()
+                finish()
+                val intent: Intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.menu_list -> {
+                Toast.makeText(applicationContext,"도서목록 메뉴를 클릭하였습니다",Toast.LENGTH_LONG).show()
+                finish()
+                val intent: Intent = Intent(this, BooksActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.menu_cart -> {
+                Toast.makeText(applicationContext,"장바구니 메뉴를 클릭하였습니다",Toast.LENGTH_LONG).show()
+
+                return true
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
