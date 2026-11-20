@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +16,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.androidbook.bookmarket.cart.CartActivity
+import com.androidbook.bookmarket.model.Book
+import com.androidbook.bookmarket.model.CartRepository.addCartItems
+import com.androidbook.bookmarket.model.CartRepository.countCartItems
 
 class BookActivity : AppCompatActivity() {
 
@@ -28,7 +33,7 @@ class BookActivity : AppCompatActivity() {
     lateinit var categoryObj: TextView
 
     lateinit var cartplusObj: Button
-    lateinit var cartCount: TextView
+    var cartCount: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +84,17 @@ class BookActivity : AppCompatActivity() {
 
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
+        val mBook: Book = Book()
+
+        mBook.bookid = bookidObj.text.toString()
+        mBook.name = nameObj.text.toString()
+        mBook.price = Integer.parseInt(priceObj.text.toString())
+        mBook.date = dateObj.text.toString()
+        mBook.writer = writerObj.text.toString()
+        mBook.description = descriptionObj.text.toString()
+        mBook.category = categoryObj.text.toString()
+        mBook.quantity = 0;
+
         cartplusObj = findViewById(R.id.book_bt01)
         cartplusObj.setOnClickListener {
             val alertDialog = AlertDialog.Builder(this)
@@ -90,9 +106,8 @@ class BookActivity : AppCompatActivity() {
                 when (i) {
                     DialogInterface.BUTTON_POSITIVE -> {
 
-                        var count = Integer.parseInt(cartCount.text.toString()) + 1
-                        cartCount.text = count.toString()
-
+                        addCartItems(mBook)
+                        cartCount?.text = countCartItems().toString()
                         dialogInterface.dismiss()
                     }
 
@@ -117,6 +132,15 @@ class BookActivity : AppCompatActivity() {
         val oklayout  = item?.actionView
         if (oklayout != null) {
             cartCount = oklayout.findViewById(R.id.cart_count)
+            val view : View = oklayout.findViewById(R.id.cart_image)
+
+            cartCount?.text = countCartItems().toString()
+
+            view.setOnClickListener {
+                val myIntent = Intent(this, CartActivity::class.java)
+                startActivity(myIntent)
+            }
+
         }
 
         return super.onCreateOptionsMenu(menu)
