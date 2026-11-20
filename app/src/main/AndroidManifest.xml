@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -45,6 +46,25 @@
         <activity  android:theme="@style/MyTheme.BookMarket"
             android:label="메모장"
             android:name=".mypage.MemoActivity"/>
+
+        <activity android:theme="@style/MyTheme.BookMarket"
+            android:label="동영상강좌"
+            android:name=".ebook.EbookActivity" />
+        <activity  android:theme="@style/MyTheme.BookMarket"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="동영상강좌"
+            android:name=".ebook.EbookVideoActivity" />
+
+        <provider
+            android:authorities="com.androidbook.bookmarket.mypage.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
 
 
